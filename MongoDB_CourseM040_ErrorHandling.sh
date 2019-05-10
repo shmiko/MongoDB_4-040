@@ -3,7 +3,7 @@
 # ============================================================================== #
 # MIT License                                                                    #
 #                                                                                #
-# Copyright (c) 2018 Donato Rimenti                                              #
+# Copyright (c) 2019 Paul Jones                                              #
 #                                                                                #
 # Permission is hereby granted, free of charge, to any person obtaining a copy   #
 # of this software and associated documentation files (the "Software"), to deal  #
@@ -24,14 +24,19 @@
 # SOFTWARE.                                                                      #
 # ============================================================================== #
 #                                                                                #
-# DESCRIPTION : Solution for MongoDB University M040's Lab 1.                    #
-# AUTHOR : Donato Rimenti                                                        #
-# COPYRIGHT : Copyright (c) 2018 Donato Rimenti                                  #
+# DESCRIPTION : Solution for MongoDB University M040's Lab 0.                    #
+# AUTHOR : Paul Jones                                                        #
+# COPYRIGHT : Copyright (c) 2019 Paul Jones                                  #
 # LICENSE : MIT                                                                  #
 #                                                                                #
 # ============================================================================== #
 
-# Creates the directories for the servers.
+# Windows 10 MongoDB 4.0 Error Handling Setup
+
+# Install Python 3 https://www.python.org/ftp/python/3.7.3/python-3.7.3-amd64.exe
+# Add to path for Python dir and scripts dir - then restart cmd windows
+
+# Creates the directories for the servers if not already doone via the first lab.
 mkdir -p ~/repl/{1,2,3}
 
 # Starts up the servers.
