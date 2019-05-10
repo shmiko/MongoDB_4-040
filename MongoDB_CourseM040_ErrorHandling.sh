@@ -37,16 +37,53 @@
 # Add to path for Python dir and scripts dir - then restart cmd windows
 
 # Creates the directories for the servers if not already doone via the first lab.
-mkdir -p ~/repl/{1,2,3}
+# get MongoDB URI change the below to include localhost on line 119 - replace m040
+    uri = 'mongodb://localhost:27017/m040?replicaSet=M040' 
 
-# Starts up the servers.
-mongod --dbpath ~/repl/1 --logpath ~/repl/1/log --port 27017 --replSet M040 --bind_ip_all --fork
-mongod --dbpath ~/repl/2 --logpath ~/repl/2/log --port 27027 --replSet M040 --bind_ip_all --fork
-mongod --dbpath ~/repl/3 --logpath ~/repl/3/log --port 27037 --replSet M040 --bind_ip_all --fork
+# Add Error handling code snippets A and B
 
-# Initiates the replicaSet.
-mongo --eval 'rs.initiate()'
-mongo --eval 'rs.add("m040:27027");rs.add("m040:27037")'
+def handle_commit(s):
+    """
+    Handles the commit operation.
+    """
+    # LAB - needs error handling
+    while True:
+        try:
+            s.commit_transaction()
+            break
+        except (pymongo.errors.OperationFailure, pymongo.errors.ConnectionFailure) as exc:
+            if exc.has_error_label("UnknownTransactionCommitResult"):
+                print("Commit error: {} retrying commit ... ".format(exc))
+                continue
+            else:
+                raise
 
-# Executes the error handling script.
-python3 loader.py
+def load_data(q, batch, uri):
+    """
+    Inserts the `batch` of documents into collections.
+    """
+    mc = pymongo.MongoClient(uri)
+    batch_total_population = 0
+    batch_docs = 0
+    try:
+        # LAB - needs error handling
+        with mc.start_session() as s:
+            while True:
+                try:
+                    batch_total_population,batch_docs = write_batch(batch, mc, s)
+                    break
+                except (pymongo.errors.OperationFailure, pymongo.errors.ConnectionFailure) as exc:
+                    if exc.has_error_label("TransientTransactionError"):
+                        print("Error detected: {} - abort".format(exc))
+                        s.abort_transaction()
+                        continue
+                    else:
+                        raise
+
+            q.put({"batch_pop": batch_total_population, "batch_docs": batch_docs})
+
+    except Exception as e:
+        print("Unexpected error found: {}".format(e))
+
+# Executes the error handling script. In windows change python3 to just python
+	python loader.py
