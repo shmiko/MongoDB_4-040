@@ -19,9 +19,11 @@ mongo 	rs.initiate()
 
 4. Run the validate script
 C:\University\m040\environment_setup>mongo --quiet validate_lab1.js
+Success:
 Great Job! Your validation code is:
 1602589782
 
 Errors are likley to be:
 Incorrect number of replica set members - Due to not running rs.add using localhost
 Unable to get replica set config - Can be due to running commands with mongo eval
+
