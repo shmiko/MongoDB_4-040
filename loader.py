@@ -43,6 +43,7 @@ def touch_collections(uri):
 def handle_commit(s):
     """
     Handles the commit operation.
+    
     """
     # LAB - needs error handling
     while True:
