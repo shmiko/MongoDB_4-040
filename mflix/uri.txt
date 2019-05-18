@@ -1,0 +1,3 @@
+mongo "mongodb+srv://mflix-fmjaa.mongodb.net/test"
+
+mongorestore --drop --gzip --uri \ "mongodb+srv://m220student:m220password@mflix-fmjaa.mongodb.net/test" data
