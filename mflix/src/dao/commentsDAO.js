@@ -45,7 +45,7 @@ export default class CommentsDAO {
     try {
       // TODO Ticket: Create/Update Comments
       // Construct the comment document to be inserted into MongoDB.
-      const commentDoc = { someField: "someValue" }
+      const commentDoc = { movieId: movieId , name: user.name, email: user.email, text: comment, date: date }
 
       return await comments.insertOne(commentDoc)
     } catch (e) {
