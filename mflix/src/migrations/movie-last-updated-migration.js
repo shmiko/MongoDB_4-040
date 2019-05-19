@@ -18,7 +18,7 @@ const MongoError = require("mongodb").MongoError
   try {
     // ensure you update your host information below!
     const host = "mongodb+srv://m220student:m220password@mflix-fmjaa.mongodb.net/";
-    //"mongodb+srv://m220student:m220password@mflix-fmjaa.mongodb.net/mflix";
+    //const host = process.env.MFLIX_DB_URI_Q;
     const client = await MongoClient.connect(
       host,
       { useNewUrlParser: true },
@@ -52,7 +52,7 @@ const MongoError = require("mongodb").MongoError
     const { modifiedCount } = await mflix
       .collection("movies")
       .bulkWrite(moviesToMigrate)
-      
+
     console.log("\x1b[32m", `${modifiedCount} documents updated`)
     client.close()
     process.exit(0)
