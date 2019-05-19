@@ -316,7 +316,7 @@ export default class MoviesDAO {
                 $match: {
                   $expr: {
                     $eq:[
-                      $movie_Id: $$id
+                      $movie_Id, $$id
                     ]
                   }
                 }
