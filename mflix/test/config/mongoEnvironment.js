@@ -11,8 +11,8 @@ module.exports = class MongoEnvironment extends NodeEnvironment {
         // Set the poolSize to 50 connections.
         // TODO: Timeouts
         // Set the write timeout limit to 2500 milliseconds.
-        { useNewUrlParser: true },
-        {connectTimeoutMS : 2500}
+        { useNewUrlParser: true ,
+        wtimeout : 2500}
       )
       await super.setup()
     }
