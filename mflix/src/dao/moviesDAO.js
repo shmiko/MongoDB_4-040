@@ -304,7 +304,8 @@ export default class MoviesDAO {
         {
           $match: {
             _id: ObjectId(id),
-          },{
+          }
+        },{
           $lookup: {
             from: comments,
             let: {
@@ -315,7 +316,7 @@ export default class MoviesDAO {
                 $match: {
                   $expr: {
                     $eq:[
-                      $movieId: $$id
+                      $movie_Id: $$id
                     ]
                   }
                 }
