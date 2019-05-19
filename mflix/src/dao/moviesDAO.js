@@ -301,32 +301,32 @@ export default class MoviesDAO {
       // TODO Ticket: Get Comments
       // Implement the required pipeline.
       const pipeline = [
-         {
+        {
           $match: {
-            _id: ObjectId(id)
+            _id: ObjectId(id),
           }
-        }, {
+        },{
           $lookup: {
-            from: comments,
+            from: "comments",
             let: {
               id: $_id
             },
             pipeline: [
-              {
+              { 
                 $match: {
                   $expr: {
-                    $eq: [
-                      $movie_id, $$id
+                    $eq:[
+                      $movie_Id, $$id
                     ]
                   }
                 }
               }, {
-                $sort: {
+                $sort:{
                   date: -1
                 }
               }
             ],
-            as: comments
+            as: "comments"
           }
         }
       ]
