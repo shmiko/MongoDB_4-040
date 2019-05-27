@@ -27,8 +27,6 @@ module.exports = class MongoEnvironment extends NodeEnvironment {
     return super.runScript(script)
   }
 }
-
-
 const baseballPlayers2 = [
   { insertOne: { '_id': 11, 'name': 'Edgar Martinez', 'salary': "8.5M" }},    // Insert #1
   { insertOne: { '_id': 3, 'name': 'Alex Rodriguez', 'salary': "18.3M" }},    // Insert #2
